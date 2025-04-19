@@ -23,6 +23,7 @@ $adminsCount = $conn->query("SELECT COUNT(*) FROM users WHERE role = 'admin'")->
                 <i class="fas fa-book-open"></i> <?= SITE_NAME ?>
             </a>
             <nav>
+                <a href="landing.html" class="landing-link">Landing</a>
                 <a href="admin.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 <a href="upload.php"><i class="fas fa-upload"></i> Upload Books</a>
                 <a href="manage_users.php"><i class="fas fa-users"></i> Manage Users</a>

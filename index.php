@@ -17,10 +17,12 @@
             </a>
             <nav>
                 <?php if (isLoggedIn()): ?>
+                    <a href="landing.html" class="landing-link">Landing</a>
                     <?php if (isAdmin()): ?>
                         <a href="admin.php"><i class="fas fa-tachometer-alt"></i> Admin</a>
                     <?php endif; ?>
                     <a href="login.php?logout=1"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    
                 <?php else: ?>
                     <a href="login.php"><i class="fas fa-sign-in-alt"></i> Login</a>
                     <a href="register.php"><i class="fas fa-user-plus"></i> Register</a>

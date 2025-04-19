@@ -34,6 +34,7 @@ if (!$book) {
                 <?php if (isAdmin()): ?>
                     <a href="admin.php"><i class="fas fa-tachometer-alt"></i> Admin</a>
                 <?php endif; ?>
+                <a href="landing.html" class="landing-link">Landing</a>
                 <a href="index.php"><i class="fas fa-home"></i> Home</a>
                 <a href="login.php?logout=1"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
