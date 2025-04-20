@@ -1,14 +1,36 @@
+/* ==========================================================================
+   Base Styles & Variables - Elegant & Modern Redesign
+   ========================================================================== */
 :root {
-    --primary: #1a5e1a;
-    --primary-light: #2e8b57;
-    --primary-dark: #0d3b0d;
-    --white: #fff;
-    --light: #f8f9fa;
-    --dark: #212529;
-    --gray: #6c757d;
-    --light-gray: #e9ecef;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    /* Elegant Color Palette */
+    --primary: #3A506B; /* Sophisticated Blue */
+    --secondary: #5BC0BE; /* Complementary Teal */
+    --accent: #E07A5F; /* Warm Coral Accent */
+    --white: #FFFFFF;
+    --light-bg: #F7F9FA; /* Soft background */
+    --dark-bg: #212529; /* For dark elements/themes if needed */
+    --text-dark: #343A40; /* Darker text for better contrast */
+    --text-light: #6C757D; /* Lighter text for secondary info */
+    --text-on-primary: #FFFFFF; /* Text color on primary background */
+    --text-on-secondary: #FFFFFF; /* Text color on secondary background */
+    --border-color: #DEE2E6; /* Subtle borders */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Softer shadow */
+
+    /* Typography */
+    --font-primary: 'Poppins', sans-serif;
+    --font-base-size: 16px;
+    --line-height-base: 1.7; /* Increased for readability */
+
+    /* Layout & Spacing */
+    --container-width: 1200px;
+    --spacing-unit: 1rem; /* 16px */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+
+    /* Transitions */
+    --transition-speed: 0.3s;
+    --transition-func: ease;
+    --transition: all var(--transition-speed) var(--transition-func);
 }
 
 * {
@@ -17,362 +39,773 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: var(--font-base-size);
+}
+
 body {
-    font-family: 'Poppins', sans-serif;
-    color: var(--dark);
-    background: var(--light);
-    line-height: 1.6;
+    font-family: var(--font-primary);
+    color: var(--text-dark);
+    background-color: var(--light-bg); /* Use the light background */
+    line-height: var(--line-height-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 15px;
+    padding-left: var(--spacing-unit);
+    padding-right: var(--spacing-unit);
 }
 
-/* Header */
+/* Add padding to main content area to prevent overlap with fixed header */
+main {
+    /* Adjust top padding calculation to reflect potential header height changes */
+    padding-top: calc(70px + var(--spacing-unit) * 2); /* Example: 70px header height + padding */
+    padding-bottom: var(--spacing-unit) * 3;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-unit);
+    color: var(--primary); /* Titles use primary color */
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+p {
+    margin-bottom: var(--spacing-unit);
+}
+
+a {
+    color: var(--secondary); /* Links use secondary color */
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary); /* Link hover uses primary color */
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
 header {
-    background: var(--white);
-    box-shadow: var(--shadow);
+    background: var(--primary); /* Header uses primary color */
+    color: var(--text-on-primary); /* Text on primary background */
+    box-shadow: 0 2px 4px var(--shadow-color);
     position: fixed;
     width: 100%;
     top: 0;
+    left: 0;
     z-index: 1000;
-    padding: 15px 0;
+    padding: calc(var(--spacing-unit) * 0.8) 0; /* Adjust padding if needed */
+    /* Set an explicit height for padding calculation in main */
+    min-height: 70px; /* Example height */
+    display: flex; /* Use flex to vertically center content */
+    align-items: center; /* Vertically center content */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: var(--primary);
-    font-size: 1.5rem;
+    color: var(--text-on-primary); /* Logo text color */
+    font-size: 1.6rem;
     font-weight: 700;
 }
 
 .logo i {
-    margin-right: 10px;
+    margin-right: 0.5em;
+    color: var(--secondary); /* Icon uses secondary color */
 }
+
+.logo:hover {
+    color: var(--secondary); /* Logo hover color */
+    text-decoration: none;
+}
+.logo:hover i {
+    color: var(--text-on-primary); /* Icon hover color */
+}
+
 
 nav {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: calc(var(--spacing-unit) * 1.5);
 }
 
 nav a {
     text-decoration: none;
-    color: var(--dark);
+    color: var(--text-on-primary); /* Nav link color */
     font-weight: 500;
-    transition: var(--transition);
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 0.4em;
+    padding: 0.5em 0;
+    position: relative;
+    opacity: 0.9;
 }
-
+nav a::after { /* Underline effect */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary); /* Underline uses secondary color */
+    transition: width var(--transition-speed) var(--transition-func);
+}
 nav a:hover {
-    color: var(--primary);
+    color: var(--secondary); /* Nav link hover color */
+    text-decoration: none;
+    opacity: 1;
+}
+nav a:hover::after {
+    width: 100%;
+}
+nav a i {
+    font-size: 0.9em;
+    margin-right: 2px;
 }
 
-/* Hero Section */
-.hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                url('assets/hero-bg.jpg') center/cover no-repeat;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    text-align: center;
+/* Mobile Navigation Placeholder */
+.mobile-nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-on-primary); /* Burger icon color */
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   Hero Sections (Generic & Landing)
+   ========================================================================== */
+.hero, .landing-hero {
+    /* Keep background setup as is or use primary */
+    /* If using image, ensure it's visible and text has contrast */
+    background-color: var(--primary); /* Default fallback */
     color: var(--white);
-    margin-top: 60px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--spacing-unit) * 4) var(--spacing-unit);
+    min-height: 350px;
+    /* Remove margin-top from .hero as main has padding-top now */
 }
 
-.hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
+.landing-hero {
+    min-height: 500px;
+    background: linear-gradient(rgba(58, 80, 107, 0.6), rgba(58, 80, 107, 0.7)), url('assets/hero-bg.jpg') center/cover no-repeat; /* Darken image slightly */
+    color: var(--white);
 }
 
-.hero p {
+.hero h1, .landing-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5em;
+    color: var(--white);
+    font-weight: 700;
+}
+
+.hero p, .landing-hero p {
     font-size: 1.2rem;
-    margin-bottom: 30px;
+    margin-bottom: 1.5em;
+    max-width: 600px;
+    opacity: 0.9;
 }
 
+/* Search Box */
 .search-box {
     display: flex;
     max-width: 600px;
-    margin: 0 auto;
+    width: 100%;
+    margin: var(--spacing-unit) auto 0;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
 }
 
 .search-box input {
-    flex: 1;
-    padding: 12px 15px;
+    flex-grow: 1;
+    padding: calc(var(--spacing-unit) * 0.8) var(--spacing-unit);
     border: none;
-    border-radius: 4px 0 0 4px;
     font-size: 1rem;
+    background-color: var(--white);
+    color: var(--text-dark);
+}
+.search-box input:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--secondary);
 }
 
 .search-box button {
-    background: var(--primary);
-    color: var(--white);
+    background: var(--secondary);
+    color: var(--text-on-secondary);
     border: none;
-    padding: 0 20px;
-    border-radius: 0 4px 4px 0;
+    padding: 0 calc(var(--spacing-unit) * 1.5);
     cursor: pointer;
     transition: var(--transition);
+    font-size: 1.1rem;
 }
 
 .search-box button:hover {
-    background: var(--primary-dark);
+    background: var(--accent); /* Hover uses accent color */
 }
 
-/* Book Grid */
-.book-grid {
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn, .form-submit, .cta-button {
+    display: inline-block;
+    padding: calc(var(--spacing-unit)*0.7) calc(var(--spacing-unit)*1.5);
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+/* Main action buttons use secondary color */
+.btn-primary, .form-submit, .cta-button, .read-btn {
+    background-color: var(--secondary);
+    color: var(--text-on-secondary);
+}
+.btn-primary:hover, .form-submit:hover, .cta-button:hover, .read-btn:hover {
+    background-color: var(--accent); /* Hover uses accent */
+    color: var(--white);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+/* Secondary action buttons */
+.btn-secondary {
+    background-color: var(--white);
+    color: var(--primary);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: var(--light-bg);
+    border-color: var(--text-light);
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* Delete buttons use accent color */
+.delete-btn {
+    background: var(--accent);
+    color: var(--white);
+}
+.delete-btn:hover {
+    background: #c96344; /* Darker accent */
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* Specific button overrides */
+.read-btn {
+    flex: 1; /* Take available space in flex container */
+}
+.read-btn:hover {
+     background: var(--accent); /* Consistent hover */
+}
+
+
+/* ==========================================================================
+   Book Grid & Cards
+   ========================================================================== */
+.book-grid, .landing-book-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
-    margin: 30px 0;
+    gap: calc(var(--spacing-unit) * 1.8);
+    margin-top: var(--spacing-unit) * 2;
+    margin-bottom: var(--spacing-unit) * 2;
 }
 
-.book-card {
-    background: var(--white);
-    border-radius: 8px;
+.book-card, .landing-book-card {
+    background: var(--white); /* Cards remain white for content clarity */
+    border-radius: var(--border-radius-md);
     overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: transform var(--transition-speed) var(--transition-func), box-shadow var(--transition-speed) var(--transition-func);
+    display: flex;
+    flex-direction: column;
 }
-
-.book-card:hover {
+.book-card:hover, .landing-book-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px var(--shadow-color);
 }
 
 .book-cover {
-    height: 200px;
-    background: var(--light-gray);
+    height: 250px;
+    background-color: var(--light-bg); /* Placeholder background */
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
-
 .book-cover img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
 .book-info {
-    padding: 15px;
+    padding: var(--spacing-unit);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
-
 .book-info h3 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-    color: var(--primary-dark);
+    font-size: 1.15rem;
+    margin-bottom: 0.3em;
+    color: var(--primary);
+    font-weight: 600;
 }
-
 .author {
-    color: var(--gray);
+    color: var(--text-light);
     font-size: 0.9rem;
-    margin-bottom: 15px;
+    margin-bottom: var(--spacing-unit);
+    flex-grow: 1;
 }
-
 .actions {
     display: flex;
-    gap: 10px;
+    gap: 0.5rem;
+    margin-top: auto;
 }
 
-.btn {
-    display: inline-block;
-    padding: 8px 15px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: var(--transition);
-}
-
-.read-btn {
-    background: var(--primary);
-    color: var(--white);
-    flex: 1;
+.no-results {
+    color: var(--text-light);
+    font-style: italic;
     text-align: center;
+    padding: var(--spacing-unit) * 2;
+    grid-column: 1 / -1;
 }
 
-.read-btn:hover {
-    background: var(--primary-dark);
+/* Featured Books Section */
+.featured-books {
+    padding: var(--spacing-unit) * 3 0; /* Add padding */
+    /* Optionally add a very subtle background */
+    /* background-color: #f0f3f5; Slightly different from body */
+}
+.featured-books h2 {
+    text-align: center;
+    margin-bottom: var(--spacing-unit) * 2;
+    font-weight: 700;
+    color: var(--primary);
 }
 
-.delete-btn {
-    background: #dc3545;
-    color: var(--white);
-}
-
-.delete-btn:hover {
-    background: #c82333;
-}
-
-/* Forms */
+/* ==========================================================================
+   Forms
+   ========================================================================== */
 .form-container {
     max-width: 500px;
-    margin: 80px auto;
-    background: var(--white);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
+    margin: calc(var(--spacing-unit) * 3) auto;
+    background: var(--white); /* White background for forms */
+    padding: calc(var(--spacing-unit) * 2);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px var(--shadow-color);
+    border-top: 4px solid var(--primary); /* Add primary color border */
 }
 
 .form-title {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: var(--spacing-unit) * 1.5;
     color: var(--primary);
+    font-weight: 700;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-unit) * 1.2;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 0.5em;
     font-weight: 500;
+    color: var(--text-dark);
 }
 
 .form-control {
     width: 100%;
-    padding: 10px 15px;
-    border: 1px solid var(--light-gray);
-    border-radius: 4px;
+    padding: calc(var(--spacing-unit)*0.8) var(--spacing-unit);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
     font-size: 1rem;
     transition: var(--transition);
+    background-color: var(--white);
+    color: var(--text-dark);
 }
-
 .form-control:focus {
-    border-color: var(--primary);
+    border-color: var(--secondary);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(26, 94, 26, 0.2);
+    box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.25); /* Secondary color focus */
+}
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
 }
 
 .form-submit {
     width: 100%;
-    padding: 12px;
-    background: var(--primary);
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
+    margin-top: var(--spacing-unit);
+    background-color: var(--primary); /* Submit buttons use primary color */
+    color: var(--text-on-primary);
 }
-
 .form-submit:hover {
-    background: var(--primary-dark);
+    background-color: var(--secondary); /* Hover uses secondary */
+    color: var(--text-on-secondary);
 }
 
-/* Admin Dashboard */
+
+.alert {
+    padding: var(--spacing-unit);
+    margin-bottom: var(--spacing-unit);
+    border-radius: var(--border-radius-sm);
+    background-color: #f8d7da; /* Error red */
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ==========================================================================
+   Reader Page
+   ========================================================================== */
+.reader-header {
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-unit);
+}
+.reader-header h1 {
+    margin-bottom: 0.2em;
+}
+.reader-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+.reader-content {
+    margin-bottom: var(--spacing-unit) * 2;
+    background: var(--white);
+    padding: var(--spacing-unit);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+.reader-content embed {
+    display: block;
+    border: none;
+    width: 100%;
+    min-height: 70vh;
+}
+.text-content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.reader-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-unit);
+    margin-top: var(--spacing-unit);
+}
+
+/* ==========================================================================
+   Admin Dashboard
+   ========================================================================== */
 .dashboard-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin: 30px 0;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-unit) * 1.5;
+    margin: var(--spacing-unit) * 2 0;
 }
 
 .stat-card {
     background: var(--white);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
+    padding: var(--spacing-unit) * 1.5;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 6px var(--shadow-color);
     text-align: center;
+    transition: var(--transition);
+    border-left: 4px solid var(--secondary); /* Add colored border */
 }
-
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px var(--shadow-color);
+}
 .stat-card h3 {
-    font-size: 2rem;
-    color: var(--primary);
-    margin-bottom: 5px;
+    font-size: 2.5rem;
+    color: var(--primary); /* Number color */
+    margin-bottom: 0.2em;
+}
+.stat-card p {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 0;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .hero {
-        height: 300px;
-    }
-    
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    .book-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
+/* Admin tables */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-unit) * 2 0;
+    background: var(--white);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
 }
-
-@media (max-width: 480px) {
-    nav {
-        gap: 10px;
-    }
-    
-    .book-grid {
-        grid-template-columns: 1fr;
-    }
+.admin-table th, .admin-table td {
+    padding: var(--spacing-unit);
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
 }
-
-.landing-hero {
-    background: url('assets/hero-bg.jpg') center/cover no-repeat;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
+.admin-table th {
+    background-color: var(--primary); /* Table header uses primary color */
+    color: var(--text-on-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
 }
-
-.landing-hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+.admin-table tr:last-child td {
+    border-bottom: none;
 }
-
-.landing-hero p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
+.admin-table tr:hover {
+    background-color: var(--light-bg); /* Row hover uses light background */
 }
-
-.cta-button {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 10px 20px;
+.admin-table .actions a {
+    margin-right: 0.5em;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
+    padding: 0.2em 0.4em;
+    border-radius: var(--border-radius-sm);
+}
+.admin-table .actions a:hover {
+    opacity: 0.8;
+}
+/* Specific styling for delete links in tables */
+.admin-table .actions a[href*="delete"] {
+     color: var(--accent);
+     /* background-color: var(--accent); */
+     /* color: var(--white); */
+}
+.admin-table .actions a[href*="delete"]:hover {
+    /* background-color: #c96344; Darker accent */
+    text-decoration: underline;
 }
 
-.featured-books {
-    padding: 50px 0;
-}
 
-.featured-books h2 {
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+footer {
+    background: var(--primary); /* Footer uses primary color */
+    color: var(--text-on-primary); /* Text on primary */
+    padding: calc(var(--spacing-unit) * 1.5) 0;
+    margin-top: var(--spacing-unit) * 3;
     text-align: center;
-    margin-bottom: 30px;
+    font-size: 0.9rem;
 }
 
-.landing-book-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+footer p {
+    margin-bottom: 0;
+    opacity: 0.9;
 }
 
-.landing-book-card {
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 5px;
-}
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
 
-@media (max-width: 768px) {
-    .landing-hero {
-        height: 400px;
+/* Tablet & Larger Mobile (e.g., > 768px) */
+@media (max-width: 992px) {
+    :root {
+        --font-base-size: 15px;
     }
-
-    .landing-hero h1 {
+    .container {
+        max-width: 960px;
+    }
+    .hero h1, .landing-hero h1 {
         font-size: 2.5rem;
     }
+    .hero p, .landing-hero p {
+        font-size: 1.1rem;
+    }
+    .book-grid, .landing-book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: var(--spacing-unit) * 1.5;
+    }
 }
+
+/* Mobile (e.g., <= 768px) */
+@media (max-width: 768px) {
+    :root {
+        --font-base-size: 14px;
+    }
+    main {
+        padding-top: calc(70px + var(--spacing-unit)); /* Adjust based on header height */
+    }
+    header .container {
+        position: relative;
+    }
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%; /* Position below header */
+        left: 0;
+        width: 100%;
+        background: var(--primary); /* Mobile nav bg same as header */
+        flex-direction: column;
+        padding: var(--spacing-unit);
+        box-shadow: 0 4px 6px var(--shadow-color);
+        gap: var(--spacing-unit);
+        border-top: 1px solid var(--secondary); /* Separator */
+    }
+    nav.mobile-active {
+        display: flex;
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+    }
+
+    .hero, .landing-hero {
+        min-height: 280px;
+        padding: calc(var(--spacing-unit) * 3) var(--spacing-unit);
+    }
+     .hero h1, .landing-hero h1 {
+        font-size: 2rem;
+    }
+    .hero p, .landing-hero p {
+        font-size: 1rem;
+    }
+
+    .book-grid, .landing-book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: var(--spacing-unit);
+    }
+    .book-cover {
+        height: 200px;
+    }
+
+    .form-container {
+        margin: var(--spacing-unit) auto;
+        padding: var(--spacing-unit) * 1.5;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr; /* Stack stat cards */
+    }
+
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        box-shadow: none; /* Remove shadow for block display */
+        border: 1px solid var(--border-color); /* Add border */
+    }
+     .admin-table thead {
+         display: none; /* Hide header on mobile */
+     }
+     .admin-table tbody, .admin-table tr, .admin-table td {
+         display: block;
+         width: 100%;
+     }
+     .admin-table tr {
+        margin-bottom: var(--spacing-unit);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+     }
+     .admin-table td {
+        text-align: right; /* Align value to right */
+        position: relative;
+        padding-left: 50%; /* Make space for label */
+        border-bottom: 1px dotted var(--border-color);
+        white-space: normal; /* Allow wrapping */
+     }
+     .admin-table td:last-child {
+        border-bottom: none;
+     }
+     .admin-table td::before { /* Add label */
+        content: attr(data-label); /* Requires adding data-label attribute to td in PHP */
+        position: absolute;
+        left: var(--spacing-unit);
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
+        text-align: left;
+        color: var(--primary);
+        white-space: nowrap; /* Prevent label wrapping */
+     }
+
+
+     .reader-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+     .reader-actions .btn {
+        width: 100%;
+     }
+
+}
+
+/* Smaller Mobile (e.g., <= 480px) */
+@media (max-width: 480px) {
+     .book-grid, .landing-book-grid {
+        grid-template-columns: 1fr; /* Single column */
+    }
+     .book-card {
+         /* Maybe simplify further */
+     }
+     .book-cover {
+         /* height: 180px; */
+     }
+     .search-box {
+         flex-direction: column;
+         border-radius: var(--border-radius-sm);
+     }
+      .search-box input, .search-box button {
+         border-radius: var(--border-radius-sm);
+         width: 100%;
+     }
+     .search-box input {
+        margin-bottom: 0.5rem;
+     }
+     .admin-table td {
+        padding-left: 40%; /* Adjust label space */
+     }
+}
+
+/* Remove redundant landing page styles from index.php's <style> tag */
+/* The styles below were previously embedded in index.php and are now */
+/* integrated or overridden by the main styles above. */
+
+/* .landing-hero { ... } /* Now handled by main .landing-hero rule */
+/* .cta-button { ... } /* Now handled by main .btn/.cta-button rules */
+/* .featured-books h2 { ... } /* Now handled by main .featured-books h2 rule */
+/* .landing-book-grid { ... } /* Now handled by main .landing-book-grid rule */
+/* .landing-book-card { ... } /* Now handled by main .landing-book-card rule */
+
